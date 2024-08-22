@@ -2,13 +2,14 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import markerIconPng from "leaflet/dist/images/marker-icon.png"
 
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import useGeoApi from "./useGeoApi";
 
 const KEY = 'nHw43szTVhRqhYWzaW9x'
 
 export default function useMap(){
-    const position = useGeoApi();
+    const [renderIteration, setRenderIteration] = useState(0);
+    const position = useGeoApi(renderIteration);
 
     useEffect(() => {
         if (!position) return;
@@ -35,4 +36,6 @@ export default function useMap(){
             map.remove()
         };
     }, [position]);
+
+    return setRenderIteration;
 }
