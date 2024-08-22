@@ -1,9 +1,12 @@
 import React from 'react';
 import './App.css';
+import useMap from './hooks/useMap';
 
 function App() {
+  useMap();
+
   return (
-    <p>Test task seed</p>
+      <div id="map"></div>
   );
 }
 
