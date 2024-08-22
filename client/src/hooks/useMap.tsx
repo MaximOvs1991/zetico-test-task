@@ -1,6 +1,6 @@
-import 'leaflet/dist/leaflet.css';
-
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+import markerIconPng from "leaflet/dist/images/marker-icon.png"
 
 import {useEffect} from "react";
 import useGeoApi from "./useGeoApi";
@@ -17,6 +17,12 @@ export default function useMap(){
             center: L.latLng(position.latitude, position.longitude),
             zoom: 14,
         });
+
+        const icon = L.icon({
+            iconUrl: markerIconPng
+        });
+
+        L.marker([position.latitude, position.longitude], { icon: icon }).addTo(map);
         L.tileLayer(`https://api.maptiler.com/maps/streets-v2/{z}/{x}/{y}.png?key=${KEY}`,{ //style URL
             tileSize: 512,
             zoomOffset: -1,
